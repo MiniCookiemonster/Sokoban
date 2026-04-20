@@ -19,6 +19,3 @@ add_executable(Sokoban WIN32
 
 # Include directories
 include_directories(src)
-
-# Keep text levels next to the generated executable/build tree for easy loading.
-file(COPY levels DESTINATION ${CMAKE_BINARY_DIR})

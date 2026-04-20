@@ -25,7 +25,6 @@ public:
 private:
     void refreshPlayerPosition();
     void addHistoryEntry(const std::string& direction, bool pushedBox);
-    bool isBoxInDeadCorner(int x, int y) const;
     static std::string directionName(int dx, int dy);
 
     Level currentLevel;

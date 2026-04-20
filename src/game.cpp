@@ -53,11 +53,7 @@ bool Game::movePlayer(int dx, int dy) {
     playerY = nextY;
     ++moveCount;
     addHistoryEntry(directionName(dx, dy), pushedBox);
-    if (pushedBox && isBoxInDeadCorner(boxNextX, boxNextY)) {
-        statusMessage = "Warning: the box is stuck in a corner. Press R to reset.";
-    } else {
-        statusMessage = pushedBox ? "Box pushed." : "Player moved.";
-    }
+    statusMessage = pushedBox ? "Box pushed." : "Player moved.";
 
     if (checkWinCondition()) {
         statusMessage = "Congratulations, all boxes are on targets!";
@@ -108,19 +104,6 @@ void Game::refreshPlayerPosition() {
 
 void Game::addHistoryEntry(const std::string& direction, bool pushedBox) {
     moveHistory.recordMove(std::to_string(moveCount) + ". " + direction + (pushedBox ? " push" : " move"));
-}
-
-bool Game::isBoxInDeadCorner(int x, int y) const {
-    if (currentLevel.isTarget(x, y)) {
-        return false;
-    }
-
-    const bool wallUp = currentLevel.isWall(x, y - 1);
-    const bool wallDown = currentLevel.isWall(x, y + 1);
-    const bool wallLeft = currentLevel.isWall(x - 1, y);
-    const bool wallRight = currentLevel.isWall(x + 1, y);
-
-    return (wallUp || wallDown) && (wallLeft || wallRight);
 }
 
 std::string Game::directionName(int dx, int dy) {
